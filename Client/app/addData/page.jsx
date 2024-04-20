@@ -16,14 +16,14 @@ export default function AddData() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if(!formData.name || !formData.email || !formData.phoneNumber){
+    if (!formData.name || !formData.email || !formData.phoneNumber) {
       alert("name, email and phoneNumber cannot be empty.");
-      return ;
+      return;
     }
-    
+
     try {
       const response = await fetch(
-        "http://localhost:5000/api/v1/user/addData",
+        "https://redpositive-backend-653g.onrender.com/api/v1/user/addData",
         {
           method: "POST",
           headers: {
@@ -35,15 +35,14 @@ export default function AddData() {
       const responseData = await response.json();
       console.log("Response from backend:", responseData);
 
-      if(response.ok){
+      if (response.ok) {
         router.push("/");
       } else {
-        throw new Error("Failed to create new Data.")
+        throw new Error("Failed to create new Data.");
       }
     } catch (error) {
       console.error("Error:", error);
     }
-
   };
 
   const handleChange = (e) => {
@@ -58,35 +57,32 @@ export default function AddData() {
 
   return (
     <div>
-    
-    <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <input name="name" placeholder="name" onChange={handleChange}></input>
+        {/* {errors.name && <p className="text-red-500">{errors.name}</p>} */}
 
-      <input name="name" placeholder="name" onChange={handleChange}></input>
-      {/* {errors.name && <p className="text-red-500">{errors.name}</p>} */}
-
-      <input name="email" placeholder="email" onChange={handleChange}></input>
-      {/* {errors.phoneNumber && (
+        <input name="email" placeholder="email" onChange={handleChange}></input>
+        {/* {errors.phoneNumber && (
         <p className="text-red-500">{errors.phoneNumber}</p>
       )} */}
 
-      <input
-        name="phoneNumber"
-        placeholder="number"
-        onChange={handleChange}
-      ></input>
-      {/* {errors.email && <p className="text-red-500">{errors.email}</p>} */}
+        <input
+          name="phoneNumber"
+          placeholder="number"
+          onChange={handleChange}
+        ></input>
+        {/* {errors.email && <p className="text-red-500">{errors.email}</p>} */}
 
-      <input
-        name="hobbies"
-        placeholder="hobbies"
-        onChange={handleChange}
-      ></input>
-      {/* {errors.hobbies && <p className="text-red-500">{errors.hobbies}</p>} */}
+        <input
+          name="hobbies"
+          placeholder="hobbies"
+          onChange={handleChange}
+        ></input>
+        {/* {errors.hobbies && <p className="text-red-500">{errors.hobbies}</p>} */}
 
-      {/* <button onClick={handleSubmit}>Submit</button> */}
-      <input type="submit"/>
-    </form>
-    
+        {/* <button onClick={handleSubmit}>Submit</button> */}
+        <input type="submit" />
+      </form>
     </div>
   );
 }

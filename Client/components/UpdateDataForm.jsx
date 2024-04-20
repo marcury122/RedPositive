@@ -4,10 +4,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function UpdateDataForm({ id }) {
-  const [newName, setNewName] = useState("");
-  const [newEmail, setNewEmail] = useState("");
-  const [newPhoneNumber, setNewPhoneNumber] = useState("");
-  const [newHobbies, setNewHobbies] = useState("");
+  const [newName, setNewName] = useState();
+  const [newEmail, setNewEmail] = useState();
+  const [newPhoneNumber, setNewPhoneNumber] = useState();
+  const [newHobbies, setNewHobbies] = useState();
 
   const router = useRouter();
 
@@ -16,25 +16,26 @@ export default function UpdateDataForm({ id }) {
     console.log(id);
     console.log("newName:", newName);
     console.log("newEmail:", newEmail);
-    console.log("newPhoneNumber:", newPhoneNumber);
-    console.log("newHobbies:", newHobbies);
 
     const sendName = newName;
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/v1/user/updateData/${id}`,
+        `https://redpositive-backend-653g.onrender.com/api/v1/user/updateData/${id}`,
         {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
-            newName,
-            newEmail,
-            newPhoneNumber,
-            newHobbies,
+            name: newName,
+            email: newEmail,
+            phoneNumber: newPhoneNumber,
+            hobbies: newHobbies,
           }),
         }
       );
+
+      console.log("newPhoneNumber:", newPhoneNumber);
+      console.log("newHobbies:", newHobbies);
 
       if (!response.ok) {
         throw new Error("update failed! Try again.");

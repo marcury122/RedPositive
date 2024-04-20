@@ -10,9 +10,12 @@ export const DeleteBtn = ({ id }) => {
     // console.log(id);
     const confirmed = confirm("are you sure?");
     if (confirmed) {
-      const response = await fetch(`http://localhost:5000/api/v1/user/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `https://redpositive-backend-653g.onrender.com/api/v1/user/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (response.ok) {
         console.log("refresh ho Raha");
         alert("refresh to see the changes.");
